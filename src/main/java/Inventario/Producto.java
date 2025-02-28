@@ -8,7 +8,7 @@ package Inventario;
  *
  * @author Alejandra Arroyo
  */
-public class Producto {
+public final class Producto {
     
     private int codigo_producto;
     private String nombre_producto;
@@ -16,7 +16,7 @@ public class Producto {
     private static int contador = 100;
     public Producto(String nombre_producto, double precio_producto) {
         this.nombre_producto = nombre_producto;
-        this.precio_producto = precio_producto;
+        setPrecio_producto(precio_producto);
         this.codigo_producto = contador++; 
         
         
@@ -32,7 +32,7 @@ public class Producto {
            this.precio_producto = precio_producto;
         }
         else{
-           System.err.println("El precio no debe ser negativo");
+            throw new IllegalArgumentException("El precio no debe ser negativo");
         }
         
     }

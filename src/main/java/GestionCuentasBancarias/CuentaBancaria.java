@@ -10,7 +10,7 @@ package GestionCuentasBancarias;
  *
  * @author Alejandra Arroyo
  */
-public class CuentaBancaria {
+public final class CuentaBancaria {
     
     private int  telefono;
 
@@ -21,19 +21,13 @@ public class CuentaBancaria {
 
     public CuentaBancaria(String dpi, double saldo_inicial, String nombre,String direccion, int telefono) {
         this.dpi = dpi;
-        this.saldo_cuenta = saldo_inicial;
-        
+        saldoInicial(saldo_inicial);
         this.nombre = nombre;
         this.direccion = direccion;
         this.telefono = telefono;
-        int numero = 10000 + (int) (Math.random() * 90000);
-        String primeros5 = dpi.substring(0, 5);
-          
-        String numeroCuentaStr = primeros5 + numero;
-        
-        this.numero_cuenta = numeroCuentaStr;
+        this.numero_cuenta = asignarCuenta(dpi);
 
-        System.out.println("Cuenta número " + numeroCuentaStr + " creada exitosamente");
+        System.out.println("Cuenta número " + this.numero_cuenta + " creada exitosamente");
           
     }
     
@@ -68,12 +62,32 @@ public class CuentaBancaria {
              System.out.println("Su nuevo saldo es de : " + this.saldo_cuenta);
          }
          
-            
-            
         }else{
             System.err.println("El monto debe ser mayor a 0");
         }
     
+    }
+    
+    
+    public void saldoInicial(double monto){
+     if (monto > 0) {
+            this.saldo_cuenta = monto;
+           
+        } else {
+            throw new IllegalArgumentException("El saldo inicial debe ser mayor a 0");
+        }
+    
+    }
+    
+    
+    public String asignarCuenta(String dpi){
+    
+         int numero = 10000 + (int) (Math.random() * 90000);
+        String primeros5 = dpi.substring(0, 5);
+          
+        String numeroCuenta = primeros5 + numero;
+        
+        return numeroCuenta;
     }
     
         
